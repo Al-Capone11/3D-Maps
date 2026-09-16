@@ -1,0 +1,13 @@
+{
+  "overrides": {
+    "minecraft:stone":       { "argb": "#FF7D7D7D", "flags": [] },
+    "minecraft:dirt":        { "argb": "#FF95603B", "flags": [] },
+    "minecraft:grass_block": { "argb": "#FF7FB238", "flags": ["GRASS"] },
+    "minecraft:sand":        { "argb": "#FFF7E9A3", "flags": [] },
+    "minecraft:water":       { "argb": "#7F3F76E4", "flags": ["TRANSLUCENT", "WATER"] },
+    "minecraft:lava":        { "argb": "#FFE25800", "flags": ["EMISSIVE"] },
+    "minecraft:oak_log":     { "argb": "#FF6D5232", "flags": ["MANMADE"] },
+    "minecraft:oak_leaves":  { "argb": "#FF59AE30", "flags": ["FOLIAGE"] },
+    "minecraft:diamond_ore": { "argb": "#FF51F1B8", "flags": [] }
+  }
+}

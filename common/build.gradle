@@ -9,6 +9,9 @@ dependencies {
     implementation "net.fabricmc:fabric-loader:${project.fabric_loader_version}"
     implementation project(':core')
 
+    // fastutil (ya esta en runtime de MC, pero hace falta para compilar common)
+    compileOnly 'it.unimi.dsi:fastutil:8.5.13'
+
     // SLF4J para el logger (proporcionado por loader en runtime)
     compileOnly 'org.slf4j:slf4j-api:2.0.16'
 }
