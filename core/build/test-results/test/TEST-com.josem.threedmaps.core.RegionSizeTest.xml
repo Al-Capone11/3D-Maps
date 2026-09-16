@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.josem.threedmaps.core.RegionSizeTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-09-16T04:09:44.186Z" hostname="DESKTOP-96O0AE7" time="0.076">
+  <properties/>
+  <testcase name="stoneRegionUnder2MB()" classname="com.josem.threedmaps.core.RegionSizeTest" time="0.076"/>
+  <system-out><![CDATA[region bytes = 4399
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,31 @@
+plugins {
+    id 'java-library'
+}
+
+dependencies {
+    // Gson para ConfigIo (core puro, portable). Se remapea en los JAR finales.
+    implementation 'com.google.code.gson:gson:2.11.0'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+// core compila a bytecode 17 para portabilidad a mc/1.20.1 (regla R2).
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    if (sourceSets.main.is(it.source)) {
+        // fuerza release 17 en main; tests pueden ir a 25
+    }
+}
+
+tasks.named('compileJava', JavaCompile) {
+    sourceCompatibility = '17'
+    targetCompatibility = '17'
+    options.release = 17
+}
+
+tasks.named('compileTestJava', JavaCompile) {
+    options.release = 17
+}
+
+test { useJUnitPlatform() }

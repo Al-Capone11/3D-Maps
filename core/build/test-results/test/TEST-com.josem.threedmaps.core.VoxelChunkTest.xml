@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.josem.threedmaps.core.VoxelChunkTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-09-16T04:09:44.263Z" hostname="DESKTOP-96O0AE7" time="0.002">
+  <properties/>
+  <testcase name="sectionCreatedOnDemand()" classname="com.josem.threedmaps.core.VoxelChunkTest" time="0.001"/>
+  <testcase name="posLongRoundTrip()" classname="com.josem.threedmaps.core.VoxelChunkTest" time="0.001"/>
+  <testcase name="heightmapRoundTrip()" classname="com.josem.threedmaps.core.VoxelChunkTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
