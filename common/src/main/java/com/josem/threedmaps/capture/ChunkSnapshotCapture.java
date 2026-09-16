@@ -64,6 +64,10 @@ public final class ChunkSnapshotCapture {
             PalettedContainer<BlockState> states = section.getStates();
             PalettedContainerRO.PackedData<BlockState> packed = states.pack(BLOCK_STRATEGY);
             ss.bitsPerEntry = packed.bitsPerEntry();
+            if (ss.bitsPerEntry < 0) {
+                // PackedData.UNKNOWN_BITS_PER_ENTRY - no serializable, skip
+                continue;
+            }
 
             List<BlockState> palette = packed.paletteEntries();
             // traducir cada bloque de la paleta a id de material local y guardar datos
