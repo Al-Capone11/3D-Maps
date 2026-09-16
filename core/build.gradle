@@ -2,18 +2,30 @@ plugins {
     id 'java-library'
 }
 
-// core compila contra Java 17 para ser portable a mc/1.20.1 sin cambios (aplica R2).
-// NO importa nada de Minecraft ni de ningun loader.
-tasks.withType(JavaCompile).configureEach {
-    options.encoding = 'UTF-8'
-    options.release = 17
-}
-
 dependencies {
+    // Gson para ConfigIo (core puro, portable). Se remapea en los JAR finales.
+    implementation 'com.google.code.gson:gson:2.11.0'
+
     testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
-test {
-    useJUnitPlatform()
+// core compila a bytecode 17 para portabilidad a mc/1.20.1 (regla R2).
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    if (sourceSets.main.is(it.source)) {
+        // fuerza release 17 en main; tests pueden ir a 25
+    }
 }
+
+tasks.named('compileJava', JavaCompile) {
+    sourceCompatibility = '17'
+    targetCompatibility = '17'
+    options.release = 17
+}
+
+tasks.named('compileTestJava', JavaCompile) {
+    options.release = 17
+}
+
+test { useJUnitPlatform() }
