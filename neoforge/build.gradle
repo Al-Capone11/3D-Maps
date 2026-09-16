@@ -1,5 +1,5 @@
 plugins {
-    id 'net.neoforged.gradle.userdev'
+    id 'net.neoforged.moddev'
     id 'java-library'
 }
 
@@ -7,9 +7,17 @@ base {
     archivesName = "3dmaps-neoforge"
 }
 
-dependencies {
-    implementation "net.neoforged:neoforge:${project.neoforge_version}"
+neoForge {
+    version = project.neoforge_version
 
+    mods {
+        "${project.mod_id}" {
+            sourceSet sourceSets.main
+        }
+    }
+}
+
+dependencies {
     implementation project(':core')
     compileOnly project(':common')
 }
