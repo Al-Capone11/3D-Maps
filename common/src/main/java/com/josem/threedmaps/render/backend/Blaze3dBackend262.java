@@ -134,6 +134,19 @@ public final class Blaze3dBackend262 implements IMapRenderBackend {
 
     public GpuTextureView resultTextureView() { return mapTarget.getColorTextureView(); }
 
+    /** Pasa la textura del mapa a pantalla usando el sampler lineal de vanilla. */
+    public void blitTo(net.minecraft.client.gui.GuiGraphicsExtractor g, int x, int y, int w, int h) {
+        if (mapTarget == null || mapTarget.getColorTextureView() == null) return;
+        var sampler = device != null
+            ? device.createSampler(com.mojang.blaze3d.textures.AddressMode.CLAMP_TO_EDGE,
+                com.mojang.blaze3d.textures.AddressMode.CLAMP_TO_EDGE,
+                com.mojang.blaze3d.textures.FilterMode.LINEAR, com.mojang.blaze3d.textures.FilterMode.LINEAR,
+                0, java.util.OptionalDouble.empty())
+            : null;
+        if (sampler == null) return;
+        g.blit(mapTarget.getColorTextureView(), sampler, x, y, x + w, y + h, 0f, 1f, 0f, 1f);
+    }
+
     @Override
     public DepthConvention depthConvention() {
         DeviceInfo info = device != null ? device.getDeviceInfo() : null;
