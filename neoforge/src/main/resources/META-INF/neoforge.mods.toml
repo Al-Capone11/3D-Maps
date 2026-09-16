@@ -1,0 +1,35 @@
+modLoader = "javafml"
+loaderVersion = "${fml_version_range}"
+license = "${mod_license}"
+issueTrackerURL = "https://github.com/Al-Capone11/3D-Maps/issues"
+
+[[mods]]
+modId = "${mod_id}"
+version = "${mod_version}"
+displayName = "${mod_name}"
+authors = "${mod_authors}"
+logoFile = "icon.png"
+description = '''
+${mod_description}
+'''
+
+[[dependencies.threedmaps]]
+    modId = "neoforge"
+    type = "required"
+    versionRange = "[${neoforge_version},)"
+    ordering = "NONE"
+    side = "BOTH"
+
+[[dependencies.threedmaps]]
+    modId = "minecraft"
+    type = "required"
+    versionRange = "${minecraft_version_range}"
+    ordering = "NONE"
+    side = "BOTH"
+
+[[dependencies.threedmaps]]
+    modId = "chunky"
+    type = "optional"
+    versionRange = "*"
+    ordering = "AFTER"
+    side = "BOTH"

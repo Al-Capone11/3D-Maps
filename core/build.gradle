@@ -1,0 +1,19 @@
+plugins {
+    id 'java-library'
+}
+
+// core compila contra Java 17 para ser portable a mc/1.20.1 sin cambios (aplica R2).
+// NO importa nada de Minecraft ni de ningun loader.
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.release = 17
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+test {
+    useJUnitPlatform()
+}

@@ -1,0 +1,57 @@
+plugins {
+    id 'net.neoforged.gradle.userdev'
+    id 'java-library'
+}
+
+base {
+    archivesName = "3dmaps-neoforge"
+}
+
+dependencies {
+    implementation "net.neoforged:neoforge:${project.neoforge_version}"
+
+    implementation project(':core')
+    compileOnly project(':common')
+}
+
+// Inyectar el codigo de common y core en este JAR (plan §4.8).
+tasks.named('compileJava', JavaCompile) {
+    source(project(':common').sourceSets.main.allSource)
+}
+tasks.named('processResources', ProcessResources) {
+    from project(':common').sourceSets.main.resources
+
+    def props = [
+        mod_id                 : project.mod_id,
+        mod_name               : project.mod_name,
+        mod_version            : project.mod_version,
+        mod_authors            : project.mod_authors,
+        mod_license            : project.mod_license,
+        mod_description        : project.mod_description,
+        minecraft_version      : project.minecraft_version,
+        minecraft_version_range: project.minecraft_version_range,
+        neoforge_version       : project.neoforge_version,
+        fml_version_range      : project.fml_version_range
+    ]
+    inputs.properties props
+    filesMatching(['META-INF/neoforge.mods.toml', 'pack.mcmeta']) {
+        expand props
+    }
+}
+tasks.named('sourcesJar', Jar) {
+    from project(':common').sourceSets.main.allSource
+    from project(':core').sourceSets.main.allSource
+}
+tasks.named('jar', Jar) {
+    from project(':core').sourceSets.main.output
+
+    manifest {
+        attributes([
+            'Specification-Title'   : project.mod_name,
+            'Specification-Version' : project.mod_version,
+            'Implementation-Title'  : project.name,
+            'Implementation-Version': "${project.mod_version}+${project.minecraft_version}",
+            'Implementation-Vendor' : project.mod_authors
+        ])
+    }
+}
